@@ -19,7 +19,7 @@ const SavedChallenges = () => {
     markChallengeIncomplete
   } = useChallenges();
 
-  const { data: savedChallenges, isLoading, error } = useQuery({
+  const { data: savedChallenges = [], isLoading, error } = useQuery<any[]>({
     queryKey: ['/api/saved-challenges'],
   });
 
