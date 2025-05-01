@@ -132,7 +132,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json({ success: true });
     } catch (error) {
-      res.status(500).json({ message: "Failed to unsave challenge", error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      res.status(500).json({ message: "Failed to unsave challenge", error: errorMessage });
     }
   });
 
@@ -158,7 +159,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(updatedChallenge);
     } catch (error) {
-      res.status(500).json({ message: "Failed to update challenge status", error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      res.status(500).json({ message: "Failed to update challenge status", error: errorMessage });
     }
   });
 
@@ -169,7 +171,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const savedChallenges = await storage.getSavedChallenges(userId);
       res.json(savedChallenges);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch saved challenges", error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      res.status(500).json({ message: "Failed to fetch saved challenges", error: errorMessage });
     }
   });
 
