@@ -16,8 +16,9 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
-// Fields of work available for challenges
+// Fields of work and hobbies available for challenges
 export const workFields = [
+  // Professional Fields
   "software-development",
   "data-science",
   "design",
@@ -27,7 +28,28 @@ export const workFields = [
   "finance",
   "education",
   "healthcare",
-  "project-management"
+  "project-management",
+  
+  // Arts & Creativity
+  "writing",
+  "visual-art",
+  "music",
+  "photography",
+  "filmmaking",
+  
+  // Crafts & Making
+  "crafts",
+  "woodworking",
+  "cooking",
+  "gardening",
+  "home-diy",
+  
+  // Personal Development
+  "language-learning",
+  "fitness",
+  "meditation",
+  "volunteering",
+  "public-speaking"
 ] as const;
 
 export const expertiseLevels = [
