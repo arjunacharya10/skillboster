@@ -38,8 +38,8 @@ const Home = () => {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Growth & Hobby Challenges</h1>
-        <p className="text-lg text-gray-600">Generate personalized challenges for your profession or hobby based on your available time</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Fun & Creative Hobby Challenges</h1>
+        <p className="text-lg text-gray-600">Generate personalized challenges for your favorite hobbies and interests based on your available time</p>
       </div>
 
       <div className="mb-8">

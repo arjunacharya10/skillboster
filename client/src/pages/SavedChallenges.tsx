@@ -100,7 +100,7 @@ const SavedChallenges = () => {
           </p>
           <Button variant="default" onClick={() => window.location.href = '/'}>
             <i className="fas fa-arrow-left mr-2"></i>
-            Go Generate Some Challenges
+            Discover Fun Hobby Challenges
           </Button>
         </div>
       ) : (

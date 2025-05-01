@@ -9,9 +9,9 @@ const Header = () => {
             <Link href="/">
               <a className="flex-shrink-0 flex items-center">
                 <div className="h-8 w-8 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-md flex items-center justify-center">
-                  <i className="fas fa-bolt text-white"></i>
+                  <i className="fas fa-dice text-white"></i>
                 </div>
-                <span className="ml-2 text-xl font-bold text-gray-900">ChallengeGen</span>
+                <span className="ml-2 text-xl font-bold text-gray-900">HobbyQuest</span>
               </a>
             </Link>
           </div>
