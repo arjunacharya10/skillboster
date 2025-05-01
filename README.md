@@ -2,7 +2,7 @@
 
 An AI-powered application that generates personalized fun and creative challenges based on your hobbies and interests.
 
-![HobbyQuest Screenshot](attached_assets/Screenshot%202025-05-01%20at%2012.05.33%20PM.png)
+![HobbyQuest Screenshot](attached_assets/home.png)
 
 ## Features
 
