@@ -18,18 +18,6 @@ export type User = typeof users.$inferSelect;
 
 // Fields of work and hobbies available for challenges
 export const workFields = [
-  // Professional Fields
-  "software-development",
-  "data-science",
-  "design",
-  "marketing",
-  "content-creation",
-  "business",
-  "finance",
-  "education",
-  "healthcare",
-  "project-management",
-  
   // Arts & Creativity
   "writing",
   "visual-art",
@@ -49,7 +37,21 @@ export const workFields = [
   "fitness",
   "meditation",
   "volunteering",
-  "public-speaking"
+  "public-speaking",
+
+  // Games & Entertainment
+  "video-games",
+  "board-games",
+  "tabletop-rpg",
+  "puzzles",
+  "collectibles",
+
+  // Outdoor Activities
+  "hiking",
+  "camping",
+  "cycling",
+  "fishing",
+  "bird-watching"
 ] as const;
 
 export const expertiseLevels = [

@@ -78,31 +78,17 @@ const ChallengeForm = ({ onChallengesGenerated }: ChallengeFormProps) => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <Label htmlFor="field" className="block text-sm font-medium text-gray-700 mb-1">
-              Field of Work
+              Hobby or Interest
             </Label>
             <Select
               onValueChange={(value) => setValue('field', value as any)}
               defaultValue={watch('field')}
             >
               <SelectTrigger id="field" className="w-full">
-                <SelectValue placeholder="Select a field or hobby..." />
+                <SelectValue placeholder="Select a hobby or interest..." />
               </SelectTrigger>
               <SelectContent>
                 <div className="px-2 py-1.5 text-sm font-semibold text-gray-500">
-                  Professional Fields
-                </div>
-                <SelectItem value="software-development">Software Development</SelectItem>
-                <SelectItem value="data-science">Data Science & Analytics</SelectItem>
-                <SelectItem value="design">Design (UI/UX/Graphic)</SelectItem>
-                <SelectItem value="marketing">Digital Marketing</SelectItem>
-                <SelectItem value="content-creation">Content Creation</SelectItem>
-                <SelectItem value="business">Business & Entrepreneurship</SelectItem>
-                <SelectItem value="finance">Finance & Accounting</SelectItem>
-                <SelectItem value="education">Education & Teaching</SelectItem>
-                <SelectItem value="healthcare">Healthcare</SelectItem>
-                <SelectItem value="project-management">Project Management</SelectItem>
-                
-                <div className="px-2 py-1.5 mt-1 text-sm font-semibold text-gray-500">
                   Arts & Creativity
                 </div>
                 <SelectItem value="writing">Writing & Storytelling</SelectItem>
@@ -128,6 +114,24 @@ const ChallengeForm = ({ onChallengesGenerated }: ChallengeFormProps) => {
                 <SelectItem value="meditation">Mindfulness & Meditation</SelectItem>
                 <SelectItem value="volunteering">Volunteering & Community</SelectItem>
                 <SelectItem value="public-speaking">Public Speaking</SelectItem>
+
+                <div className="px-2 py-1.5 mt-1 text-sm font-semibold text-gray-500">
+                  Games & Entertainment
+                </div>
+                <SelectItem value="video-games">Video Games</SelectItem>
+                <SelectItem value="board-games">Board Games</SelectItem>
+                <SelectItem value="tabletop-rpg">Tabletop RPGs</SelectItem>
+                <SelectItem value="puzzles">Puzzles & Brain Teasers</SelectItem>
+                <SelectItem value="collectibles">Collecting & Collections</SelectItem>
+
+                <div className="px-2 py-1.5 mt-1 text-sm font-semibold text-gray-500">
+                  Outdoor Activities
+                </div>
+                <SelectItem value="hiking">Hiking & Walking</SelectItem>
+                <SelectItem value="camping">Camping & Outdoor Survival</SelectItem>
+                <SelectItem value="cycling">Cycling & Biking</SelectItem>
+                <SelectItem value="fishing">Fishing</SelectItem>
+                <SelectItem value="bird-watching">Bird Watching & Nature Observation</SelectItem>
               </SelectContent>
             </Select>
             {errors.field && (
@@ -207,7 +211,7 @@ const ChallengeForm = ({ onChallengesGenerated }: ChallengeFormProps) => {
               id="focusArea"
               type="text"
               {...register('focusArea')}
-              placeholder="e.g., React.js, Watercolor Painting, Novel Writing, Guitar Practice..."
+              placeholder="e.g., Fantasy Novel Writing, Chess Strategy, Landscape Photography, Sourdough Baking..."
             />
             {errors.focusArea && (
               <p className="text-sm text-red-500 mt-1">{errors.focusArea.message}</p>

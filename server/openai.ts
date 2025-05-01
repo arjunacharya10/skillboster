@@ -26,13 +26,7 @@ export async function generateChallenges(
 
     const totalMinutes = timeHours * 60 + timeMinutes;
     
-    // Determine if this is a professional field or a hobby/personal development area
-    const isProfessional = [
-      "software-development", "data-science", "design", "marketing", 
-      "content-creation", "business", "finance", "education", 
-      "healthcare", "project-management"
-    ].includes(field);
-    
+    // Determine the type of hobby or interest
     const isArtistic = [
       "writing", "visual-art", "music", "photography", "filmmaking"
     ].includes(field);
@@ -44,24 +38,34 @@ export async function generateChallenges(
     const isPersonalDevelopment = [
       "language-learning", "fitness", "meditation", "volunteering", "public-speaking"
     ].includes(field);
+
+    const isGaming = [
+      "video-games", "board-games", "tabletop-rpg", "puzzles", "collectibles"
+    ].includes(field);
+
+    const isOutdoor = [
+      "hiking", "camping", "cycling", "fishing", "bird-watching"
+    ].includes(field);
     
     let domainType = "";
-    if (isProfessional) domainType = "professional field";
-    else if (isArtistic) domainType = "creative practice";
+    if (isArtistic) domainType = "creative practice";
     else if (isCraft) domainType = "craft or making activity";
     else if (isPersonalDevelopment) domainType = "personal development area";
-    else domainType = "area of interest";
+    else if (isGaming) domainType = "gaming or entertainment hobby";
+    else if (isOutdoor) domainType = "outdoor activity";
+    else domainType = "hobby or interest";
 
-    const systemPrompt = `You are an expert coach specializing in creating growth and development challenges. 
-    Your task is to generate ${count} practical, realistic, and actionable challenges for a person in the ${domainType} of ${field} 
+    const systemPrompt = `You are an expert hobby coach specializing in creating fun and engaging challenges. 
+    Your task is to generate ${count} enjoyable, creative, and actionable challenges for a person interested in the ${domainType} of ${field} 
     with an expertise level of ${expertiseLevel}. 
-    Each challenge should be completable within approximately ${totalMinutes} minutes.
+    Each challenge should be completable within approximately ${totalMinutes} minutes and should be fun and rewarding.
     ${focusArea ? `Focus specifically on the area of: ${focusArea}` : ""}
     
-    The challenges should be specific, actionable, and help the user develop relevant skills in their field.
+    The challenges should be specific, actionable, and help the user enjoy their hobby while developing relevant skills.
+    Make the challenges playful, engaging, and designed to increase enjoyment of the hobby.
     For requirements, list 3-6 specific things that must be accomplished to complete the challenge.
     For resources, provide 1-3 actual links or resources (with titles and URLs) that would help complete the challenge.
-    For tags, provide 2-5 relevant skill tags that the challenge helps develop.
+    For tags, provide 2-5 relevant skill or fun tags that the challenge helps develop.
     
     Structure each challenge exactly according to the specified JSON format:
     {
@@ -81,9 +85,9 @@ export async function generateChallenges(
     }
     `;
 
-    const userPrompt = `Generate ${count} challenges for someone with ${expertiseLevel} level in ${field}${
+    const userPrompt = `Generate ${count} fun and engaging hobby challenges for someone with ${expertiseLevel} level in ${field}${
       focusArea ? ` focusing on ${focusArea}` : ""
-    } that can be completed in ${totalMinutes} minutes or less.`;
+    } that can be completed in ${totalMinutes} minutes or less. Make the challenges enjoyable and rewarding.`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
