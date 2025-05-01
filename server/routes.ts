@@ -41,11 +41,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       if (error instanceof ZodError) {
         res.status(400).json({ message: "Invalid request data", errors: error.errors });
-      } else if (error.message.includes("OpenAI")) {
+      } else if (error instanceof Error && error.message.includes("OpenAI")) {
         res.status(502).json({ message: `AI service error: ${error.message}` });
       } else {
         console.error("Error generating challenges:", error);
-        res.status(500).json({ message: "Failed to generate challenges", error: error.message });
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        res.status(500).json({ message: "Failed to generate challenges", error: errorMessage });
       }
     }
   });
@@ -56,7 +57,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const challenges = await storage.getChallenges();
       res.json(challenges);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch challenges", error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      res.status(500).json({ message: "Failed to fetch challenges", error: errorMessage });
     }
   });
 
@@ -75,7 +77,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(challenge);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch challenge", error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      res.status(500).json({ message: "Failed to fetch challenge", error: errorMessage });
     }
   });
 
@@ -106,7 +109,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof ZodError) {
         res.status(400).json({ message: "Invalid request data", errors: error.errors });
       } else {
-        res.status(500).json({ message: "Failed to save challenge", error: error.message });
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        res.status(500).json({ message: "Failed to save challenge", error: errorMessage });
       }
     }
   });

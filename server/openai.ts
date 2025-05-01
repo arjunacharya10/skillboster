@@ -26,8 +26,34 @@ export async function generateChallenges(
 
     const totalMinutes = timeHours * 60 + timeMinutes;
     
-    const systemPrompt = `You are an expert career development coach specializing in creating professional growth challenges. 
-    Your task is to generate ${count} practical, realistic, and actionable professional challenges for a person in the field of ${field} 
+    // Determine if this is a professional field or a hobby/personal development area
+    const isProfessional = [
+      "software-development", "data-science", "design", "marketing", 
+      "content-creation", "business", "finance", "education", 
+      "healthcare", "project-management"
+    ].includes(field);
+    
+    const isArtistic = [
+      "writing", "visual-art", "music", "photography", "filmmaking"
+    ].includes(field);
+    
+    const isCraft = [
+      "crafts", "woodworking", "cooking", "gardening", "home-diy"
+    ].includes(field);
+    
+    const isPersonalDevelopment = [
+      "language-learning", "fitness", "meditation", "volunteering", "public-speaking"
+    ].includes(field);
+    
+    let domainType = "";
+    if (isProfessional) domainType = "professional field";
+    else if (isArtistic) domainType = "creative practice";
+    else if (isCraft) domainType = "craft or making activity";
+    else if (isPersonalDevelopment) domainType = "personal development area";
+    else domainType = "area of interest";
+
+    const systemPrompt = `You are an expert coach specializing in creating growth and development challenges. 
+    Your task is to generate ${count} practical, realistic, and actionable challenges for a person in the ${domainType} of ${field} 
     with an expertise level of ${expertiseLevel}. 
     Each challenge should be completable within approximately ${totalMinutes} minutes.
     ${focusArea ? `Focus specifically on the area of: ${focusArea}` : ""}
@@ -37,9 +63,25 @@ export async function generateChallenges(
     For resources, provide 1-3 actual links or resources (with titles and URLs) that would help complete the challenge.
     For tags, provide 2-5 relevant skill tags that the challenge helps develop.
     
-    Structure each challenge exactly according to the specified JSON format.`;
+    Structure each challenge exactly according to the specified JSON format:
+    {
+      "challenges": [
+        {
+          "title": "Challenge Title",
+          "description": "Detailed description of the challenge",
+          "timeHours": 1,
+          "timeMinutes": 30,
+          "requirements": ["Requirement 1", "Requirement 2", "Requirement 3"],
+          "resources": [
+            { "title": "Resource Title", "url": "https://example.com" }
+          ],
+          "tags": ["Skill1", "Skill2", "Skill3"]
+        }
+      ]
+    }
+    `;
 
-    const userPrompt = `Generate ${count} challenges for a ${expertiseLevel} professional in ${field}${
+    const userPrompt = `Generate ${count} challenges for someone with ${expertiseLevel} level in ${field}${
       focusArea ? ` focusing on ${focusArea}` : ""
     } that can be completed in ${totalMinutes} minutes or less.`;
 
@@ -75,8 +117,9 @@ export async function generateChallenges(
       resources: challenge.resources,
       tags: challenge.tags,
     }));
-  } catch (error) {
-    console.error("Error generating challenges:", error);
-    throw new Error(`Failed to generate challenges: ${error.message}`);
+  } catch (err) {
+    console.error("Error generating challenges:", err);
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    throw new Error(`Failed to generate challenges: ${errorMessage}`);
   }
 }
